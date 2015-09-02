@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AB8A3CBF1B72DC1D006F4432 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8A3CBE1B72DC1D006F4432 /* main.cpp */; };
 		AB8A3CC61B72DEB3006F4432 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB8A3CC51B72DEB3006F4432 /* OpenGL.framework */; };
-		AB8A3CCB1B72E23B006F4432 /* GSWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = AB8A3CC91B72E23B006F4432 /* GSWindow.cpp */; };
 		ABD3D09D1B77AF2F00DB597B /* GSShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D09B1B77AF2F00DB597B /* GSShader.cpp */; };
 		ABD3D0A31B77C84F00DB597B /* GSMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = ABD3D0A11B77C84F00DB597B /* GSMesh.cpp */; };
 		ABF0734C1B968585000FE8FE /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABF0734B1B968585000FE8FE /* SDL2.framework */; };
@@ -31,8 +30,6 @@
 		AB8A3CBB1B72DC1D006F4432 /* GSEngine */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GSEngine; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB8A3CBE1B72DC1D006F4432 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		AB8A3CC51B72DEB3006F4432 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		AB8A3CC91B72E23B006F4432 /* GSWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSWindow.cpp; sourceTree = "<group>"; };
-		AB8A3CCA1B72E23B006F4432 /* GSWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSWindow.h; sourceTree = "<group>"; };
 		ABD3D09B1B77AF2F00DB597B /* GSShader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSShader.cpp; sourceTree = "<group>"; };
 		ABD3D09C1B77AF2F00DB597B /* GSShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSShader.h; sourceTree = "<group>"; };
 		ABD3D0A11B77C84F00DB597B /* GSMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GSMesh.cpp; sourceTree = "<group>"; };
@@ -76,8 +73,6 @@
 		AB8A3CBD1B72DC1D006F4432 /* GSEngine */ = {
 			isa = PBXGroup;
 			children = (
-				AB8A3CCA1B72E23B006F4432 /* GSWindow.h */,
-				AB8A3CC91B72E23B006F4432 /* GSWindow.cpp */,
 				ABD3D09C1B77AF2F00DB597B /* GSShader.h */,
 				ABD3D09B1B77AF2F00DB597B /* GSShader.cpp */,
 				ABD3D0A21B77C84F00DB597B /* GSMesh.h */,
@@ -146,7 +141,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AB8A3CBF1B72DC1D006F4432 /* main.cpp in Sources */,
-				AB8A3CCB1B72E23B006F4432 /* GSWindow.cpp in Sources */,
 				ABD3D0A31B77C84F00DB597B /* GSMesh.cpp in Sources */,
 				ABD3D09D1B77AF2F00DB597B /* GSShader.cpp in Sources */,
 			);

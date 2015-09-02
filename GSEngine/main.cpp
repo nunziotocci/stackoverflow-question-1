@@ -11,11 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "GSWindow.h"
 #include "GSShader.h"
 #include "GSMesh.h"
 
-GSWindow *mainWindow = NULL;
+SDL_Window *window = NULL;
+SDL_GLContext openGLRenderer;
 bool bolRunning = true;
 int intGLVersionMajor, intGLVersionMinor;
 
@@ -37,9 +37,23 @@ GLuint intShaderAttribPosition;
 int main(int argc, char **argv) {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	
-	mainWindow = new GSWindow();
-	mainWindow->open(640, 480);
-	mainWindow->makeCurrent();
+	window = SDL_CreateWindow("GSEngine",
+							  SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+							  640, 480,
+							  SDL_WINDOW_OPENGL);
+	
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+	
+	if (window == NULL) {
+		printf("Could not create window: %s\n", SDL_GetError());
+		exit(1);
+	}
+	
+	openGLRenderer = SDL_GL_CreateContext(window);
+	
+	SDL_GL_MakeCurrent(window, openGLRenderer);
 	glViewport(0, 0, 640, 480);
 	
 	glGetIntegerv(GL_MAJOR_VERSION, &intGLVersionMajor);
@@ -52,24 +66,6 @@ int main(int argc, char **argv) {
 	mesh = new GSMesh();
 	mesh->build(arrFVertex, shader, 6);
 	
-	//intShaderAttribPosition = glGetAttribLocation(shader->intShaderProgram, "f3Position");
-	
-	//glGenVertexArrays(1, &intVAO);
-	//glBindVertexArray(intVAO);
-	
-	//glGenBuffers(1, &intVBO);
-	//glBindBuffer(GL_ARRAY_BUFFER, intVBO);
-	
-	//glVertexAttribPointer(intShaderAttribPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *)0);
-	//glEnableVertexAttribArray(intShaderAttribPosition);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(arrFVertex), arrFVertex, GL_STATIC_DRAW);
-	
-	//glBindVertexArray(0);
-	
-	printf("glIsVertexArray(mesh->intVAO) = %s\n", glIsVertexArray(mesh->intVAO) == GL_TRUE ? "true" : "false");
-	printf("glIsBuffer(mesh->intVBO) = %s\n", glIsBuffer(mesh->intVBO) == GL_TRUE ? "true" : "false");
-	printf("glIsProgram(shader->intShaderProgram) = %s\n", glIsProgram(shader->intShaderProgram) == GL_TRUE ? "true" : "false");
-	
 	while (bolRunning) {
 		SDL_Event event;
 		while (SDL_PollEvent(&event)) {
@@ -78,28 +74,21 @@ int main(int argc, char **argv) {
 			}
 		}
 		
-		mainWindow->makeCurrent();
-		mainWindow->clear(0.0f, 0.0f, 1.0f, 1.0f);
+		SDL_GL_MakeCurrent(window, openGLRenderer);
+		glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		shader->use();
 		mesh->draw();
-		//glBindVertexArray(intVAO);
 		
-		//glDrawArrays(GL_TRIANGLES, 0, 6);
-		
-		//glBindVertexArray(0);
-		
-		mainWindow->swapBuffers();
-		
-		printf("0x%4x\n", glGetError());
+		SDL_GL_SwapWindow(window);
 	}
 	
 	delete shader;
 	delete mesh;
-	//glDeleteBuffers(1, &intVBO);
-	//glDeleteVertexArrays(1, &intVAO);
 	
-	delete mainWindow;
+	SDL_GL_DeleteContext(openGLRenderer);
+	SDL_DestroyWindow(window);
 	SDL_Quit();
 	
     return 0;

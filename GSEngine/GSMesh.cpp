@@ -22,12 +22,6 @@ void GSMesh::build(GLfloat *arrFVertex, GSShader *shader, int _intNumVertex) {
 	glGenBuffers(1, &intVBO);
 	glBindBuffer(GL_ARRAY_BUFFER, intVBO);
 	
-	printf("*glIsVertexArray(intVAO) = %s\n", glIsVertexArray(intVAO) == GL_TRUE ? "true" : "false");
-	printf("*glIsBuffer(intVBO) = %s\n", glIsBuffer(intVBO) == GL_TRUE ? "true" : "false");
-	printf("*glIsProgram(shader->intShaderProgram) = %s\n", glIsProgram(shader->intShaderProgram) == GL_TRUE ? "true" : "false");
-	printf("intShaderAttribPosition = %i\n", intShaderAttribPosition);
-	
-	
 	glVertexAttribPointer(intShaderAttribPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (GLvoid *)0);
 	glEnableVertexAttribArray(intShaderAttribPosition);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(arrFVertex), arrFVertex, GL_STATIC_DRAW);
